@@ -36,7 +36,7 @@ public class Modelo {
 	 */
 	public Modelo()
 	{
-//		datos = new ArregloDinamico<YoutubeVideo>();
+		datos = new ArregloDinamico<YoutubeVideo>();
 		datos = new ListaEncadenada<YoutubeVideo>();
 	}
 	
@@ -138,7 +138,6 @@ public class Modelo {
 		    datos.addLast(nuevo);
 		    }
 		}
-		
 		long miliF = System.currentTimeMillis();
 		return "Tiempo de ejecución total: "+((miliF-miliI))+" milisegundos, \nTotal datos cargados: "+ datos.size();
 	}	

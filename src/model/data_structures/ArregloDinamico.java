@@ -27,7 +27,13 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
          * Construir un arreglo con la capacidad maxima inicial.
          * @param max Capacidad maxima inicial
          */
-		public ArregloDinamico( )
+		public ArregloDinamico(int max)
+        {
+               elementos = (T[]) new Comparable[max];
+               tamanoMax = max;
+               tamanoAct = 0;
+        }
+		public ArregloDinamico()
         {
                elementos = (T[]) new Comparable[1];
                tamanoMax = 1;

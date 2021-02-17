@@ -16,4 +16,13 @@ public interface ILista <T extends Comparable<T>>{
 	int isPresent(T element);
 	void exchange(int pos1, int pos2);
 	void changeInfo(int pos, T elem);
+	
+	/**
+	* Crear una sublista de la lista original (this).
+	* Los elementos se toman en el mismo orden como aparecen en la lista original (this).
+	* @param número de elementos que contendrá la sublista. Si el número es superior al tamaño
+	* original de la lista, se obtiene una copia de la lista original.
+	* @return sublista creada con la misma representación de la lista original (this).
+	*/
+	ILista<T> sublista(int numElementos);
 }
