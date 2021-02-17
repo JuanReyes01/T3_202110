@@ -31,23 +31,19 @@ public class Modelo {
 	 */
 	private ILista<YoutubeVideo> datos;
 	
-	/**
-	 * Constructor del modelo del mundo con capacidad predefinida
-	 */
 	public Modelo()
-	{
-		datos = new ArregloDinamico<YoutubeVideo>();
-		datos = new ListaEncadenada<YoutubeVideo>();
+	{	
 	}
 	
-	/**
-	 * Constructor del modelo del mundo con capacidad dada
-	 * @param tamano
-	 */
-//	public Modelo(int capacidad)
-//	{
-//		datos = new ArregloDinamico<String>(capacidad);
-//	}
+	public void inicializarEstrcturas(int tipoLista){
+		if(tipoLista==0){
+			datos = new ArregloDinamico<YoutubeVideo>();			
+		}
+		else if(tipoLista==1){			
+			datos = new ListaEncadenada<YoutubeVideo>();
+		}
+	}
+	
 	
 	/**
 	 * Servicio de consulta de numero de elementos presentes en el modelo 
@@ -88,18 +84,25 @@ public class Modelo {
 		return datos.deleteElement(datos.isPresent(dato));
 	}
 	
-	
-	/**
-	 * Requerimiento invierte los datos
-	 */
-	//public void invertir(){
-	//	datos.exchange(1, 3);
-	//}
+	public ILista<YoutubeVideo> subLista(int i){
+		return datos.sublista(i);
+	}
 	
 	public ILista<YoutubeVideo> darArreglo(){
 		return datos;
 	}
 	
+	public int ordenar(int alg){
+		if(alg==1)
+			return 1;
+		if(alg==2)
+			return 2;
+		if(alg==3)
+			return 3;
+		if(alg==4)
+			return 4;
+		return 0;
+	}
 	
 	//NOTA
 	//Como estamos utilizando el TAD la opcion 1 y 2 se controlan desde el constructor de la clase Modelo()

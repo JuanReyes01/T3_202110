@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
+import jdk.nashorn.internal.ir.CatchNode;
+import model.data_structures.ILista;
 import model.logic.Modelo;
 import view.View;
 
@@ -38,86 +40,61 @@ public class Controller {
 			int option = lector.nextInt();
 			switch(option){
 				case 1:
-					view.printMessage("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: *Deshabilitado*");
-				    int capacidad = lector.nextInt();
-				    modelo = new Modelo(); 
-				    view.printMessage("Arreglo Dinamico creado");
-				    view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+					view.printMessage("------- \n=>Ingresa 0 si se quiere utilizar un arreglo dinamico\n=>Ingresa 1 si se quiere utilizar una lista encadenada");
+					dato = lector.next();
+					modelo.inicializarEstrcturas(Integer.parseInt(dato));
+					view.printMessage("Se inicialicio una estructa del tipo: "+ (dato.equals("0")?"ArregloDinamico":"ListaEncadenada")+"\n-------");
 					break;
 
 				case 2:
-					view.printMessage("--------- \nDar cadena (simple) a ingresar: *Deshabilitado*");
-					dato = lector.next();
-					//modelo.agregar(dato);
-					view.printMessage("Dato agregado");
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
+					view.printMessage("------- \nCargando datos...");
+					try {
+						String r;
+						r = modelo.cargarDatos();							
+						view.printMessage("------------------------------------------");
+						view.printMessage(r);
+						view.printMessage("Primer video: titulo: "+modelo.darArreglo().firstElement().darTitulo()+", canal: "+modelo.darArreglo().firstElement().darCanal()+" ,país: "+modelo.darArreglo().firstElement().darPais());
+						view.printMessage("Ultimo video: titulo: "+modelo.darArreglo().lastElement().darTitulo()+", canal: "+modelo.darArreglo().lastElement().darCanal()+" ,país: "+modelo.darArreglo().lastElement().darPais());
+						view.printMessage("-------");
+						} 
+					catch (IOException e) {						
+						e.printStackTrace();
+						}
+					catch(ParseException e){
+						e.printStackTrace();
+					}
+					catch(Exception e){
+						view.printMessage("Error: no hay una estructura de datos inicilizada");
+					}
+				break;
 
 				case 3:
-					view.printMessage("--------- \nDar cadena (simple) a buscar: *deshabilitado para YoutubeVideo*");
+					view.printMessage("--------- \nDar tamaño de la nueva sublista:");
 					dato = lector.next();
-					//respuesta = modelo.buscar(dato);
-					if ( respuesta != null)
-					{
-						view.printMessage("Dato encontrado: "+ respuesta.toString());
-					}
-					else
-					{
-						view.printMessage("Dato NO encontrado");
-					}
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+					ILista nuevo = modelo.subLista(Integer.parseInt(dato));
+					view.printMessage("Copia exitosa. \nTamaño de la nueva lista: "+nuevo.size()+"\n---------");
 					break;
 
 				case 4:
-					view.printMessage("--------- \nDar cadena (simple) a eliminar: *deshabilitado para YoutubeVideo*");
+					view.printMessage("--------- \nSeleccione cual tipo de algoritmo quiere utilizar");
+					view.printMessage("=>1. Insertion sort\n=>2. Shell Sort\n=>3.Merge Sort\n=>4.Quick Sort");
 					dato = lector.next();
-					//respuesta = modelo.eliminar(dato);
-					if ( respuesta != null)
-					{
-						view.printMessage("Dato eliminado "+ respuesta.toString());
-					}
-					else
-					{
-						view.printMessage("Dato NO eliminado");							
-					}
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+					view.printMessage("Algoritmo seleccionado: "+ (dato.equals("1")?"Insertion sort":
+																 (dato.equals("2")?"Shell sort":
+																 (dato.equals("3")?"Merge sort":
+																  "Quick sort"))));
+					int tiempo = modelo.ordenar(Integer.parseInt(dato));
+					view.printMessage("Lista Ordenada!");
+					view.printMessage("Tiempo de ejecución total: " + tiempo+ " milisegundos");
+					//Faltan los 10 primeros/ultimos videos
 					break;
 
 				case 5: 
-					view.printMessage("--------- \nContenido del Arreglo: ");
-					view.printModelo(modelo);
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;	
-				
-				case 6:
-					view.printMessage("--------- \nInvertiendo Arreglo:*Deshabilitado*");
-					//modelo.invertir();
-					view.printModelo(modelo);
-					break;
-					
-				case 8: 
 					view.printMessage("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;
-					break;	
-				case 7:
-				try {
-					String r;
-					try {
-						r = modelo.cargarDatos();
-					
-					view.printMessage("------------------------------------------");
-					view.printMessage(r);
-					view.printMessage("Primer video: titulo: "+modelo.darArreglo().firstElement().darTitulo()+", canal: "+modelo.darArreglo().firstElement().darCanal()+" ,país: "+modelo.darArreglo().firstElement().darPais());
-					view.printMessage("Ultimo video: titulo: "+modelo.darArreglo().lastElement().darTitulo()+", canal: "+modelo.darArreglo().lastElement().darCanal()+" ,país: "+modelo.darArreglo().lastElement().darPais());
-					} catch (ParseException e) {						
-						e.printStackTrace();
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-					break;
-
+					break;				
+				
 				default: 
 					view.printMessage("--------- \n Opcion Invalida !! \n---------");
 					break;
