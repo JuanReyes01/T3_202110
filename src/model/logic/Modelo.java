@@ -91,6 +91,32 @@ public class Modelo {
 	public ILista<YoutubeVideo> darArreglo(){
 		return datos;
 	}
+	/**
+	 * Organiza la lista dependiaendo del metodo que llega por parametro.
+	 * @param z  int que representa el metodo para organizar la lista
+	 * @return Un int para ordenar la lista.
+	 */
+	public int organizarLista( int z)
+	{
+		int x = 0;
+		if(z == 4)
+		{
+			x = 4;
+		}
+		if(z == 3)
+		{
+			x = 3;
+		}	
+		if(z == 2)
+		{
+			x = 2;
+		}
+		if(z == 1)
+		{
+			x = 1;
+		}
+		return x;
+	}
 	
 	public int ordenar(int alg){
 		if(alg==1)
@@ -142,6 +168,16 @@ public class Modelo {
 		    }
 		}
 		long miliF = System.currentTimeMillis();
-		return "Tiempo de ejecución total: "+((miliF-miliI))+" milisegundos, \nTotal datos cargados: "+ datos.size();
+		return "Tiempo de ejecuciï¿½n total: "+((miliF-miliI))+" milisegundos, \nTotal datos cargados: "+ datos.size();
+	}
+
+	public void crearEstructura(int i) {
+		if(i==0){
+			datos = new ArregloDinamico<YoutubeVideo>();			
+		}
+		else if(i==1){			
+			datos = new ListaEncadenada<YoutubeVideo>();
+		}
+		
 	}	
 }

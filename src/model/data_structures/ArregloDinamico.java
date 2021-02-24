@@ -1,5 +1,7 @@
 package model.data_structures;
 
+import java.util.ArrayList;
+
 /**
  * 2019-01-23
  * Estructura de Datos Arreglo Dinamico de Strings.
@@ -275,6 +277,28 @@ public void exchange(int pos1, int pos2) {
 public void changeInfo(int pos, T elem) {
 	int posReal = pos-1;
 	elementos[posReal] = elem;
+}
+
+/**
+* Crear una sublista de la lista original (this).
+* Los elementos se toman en el mismo orden como aparecen en la lista original (this).
+* @param número de elementos que contendrá la sublista. Si el número es superior al tamaño
+* original de la lista, se obtiene una copia de la lista original.
+* @return sublista creada con la misma representación de la lista original (this).
+*/ 
+public ILista<T> sublista(int numElementos) {
+	ILista<T> copia = (ILista<T>) new ArrayList<T>();
+	if(numElementos == tamanoMax){
+		copia = this;
+	}
+	else{
+		for(int i = 0; i < elementos.length; i++)
+		{
+			T x = (T) firstElement();
+			copia.addLast(x);
+		}
+	}
+	return copia;
 }
 			
 		}
