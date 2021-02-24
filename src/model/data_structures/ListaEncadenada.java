@@ -189,19 +189,6 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T>{
 	}
 
 	
-	public ListaEncadenada<T> sublista(int numElementos) {
-		ListaEncadenada<T> nueva = new ListaEncadenada<>();
-		if(numElementos==tamano)
-			nueva = this;
-		else{
-			NodoLista<T> actual = first;
-			for(int i=0; i<numElementos; i++){
-				nueva.addLast(actual.getInfo());
-			}
-		}
-		return nueva;
-	}
-	
 	/**
 	 * Crear una sublista de la lista original (this).
 	 * Los elementos se toman en el mismo orden como aparecen en la lista original (this).

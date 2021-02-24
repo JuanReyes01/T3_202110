@@ -35,7 +35,9 @@ public class Controller {
 		Object respuesta = null;
 
 		
-
+		while(!fin){
+			view.printMenu();
+			
 			int option = lector.nextInt();
 			switch(option){
 				case 1:
@@ -99,6 +101,5 @@ public class Controller {
 					break;
 			}
 		}
-}
+		}
 	}
-}
