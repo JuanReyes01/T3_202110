@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-import jdk.nashorn.internal.ir.CatchNode;
 import model.data_structures.ILista;
 import model.logic.Modelo;
 import view.View;
@@ -26,7 +25,8 @@ public class Controller {
 		view = new View();
 		modelo = new Modelo();
 	}
-		
+
+
 	public void run() 
 	{
 		Scanner lector = new Scanner(System.in);
@@ -34,8 +34,7 @@ public class Controller {
 		String dato = "";
 		Object respuesta = null;
 
-		while( !fin ){
-			view.printMenu();
+		
 
 			int option = lector.nextInt();
 			switch(option){
@@ -53,8 +52,8 @@ public class Controller {
 						r = modelo.cargarDatos();							
 						view.printMessage("------------------------------------------");
 						view.printMessage(r);
-						view.printMessage("Primer video: titulo: "+modelo.darArreglo().firstElement().darTitulo()+", canal: "+modelo.darArreglo().firstElement().darCanal()+" ,país: "+modelo.darArreglo().firstElement().darPais());
-						view.printMessage("Ultimo video: titulo: "+modelo.darArreglo().lastElement().darTitulo()+", canal: "+modelo.darArreglo().lastElement().darCanal()+" ,país: "+modelo.darArreglo().lastElement().darPais());
+						view.printMessage("Primer video: titulo: "+modelo.darArreglo().firstElement().darTitulo()+", canal: "+modelo.darArreglo().firstElement().darCanal()+" ,paï¿½s: "+modelo.darArreglo().firstElement().darPais());
+						view.printMessage("Ultimo video: titulo: "+modelo.darArreglo().lastElement().darTitulo()+", canal: "+modelo.darArreglo().lastElement().darCanal()+" ,paï¿½s: "+modelo.darArreglo().lastElement().darPais());
 						view.printMessage("-------");
 						} 
 					catch (IOException e) {						
@@ -69,10 +68,10 @@ public class Controller {
 				break;
 
 				case 3:
-					view.printMessage("--------- \nDar tamaño de la nueva sublista:");
+					view.printMessage("--------- \nDar tamaï¿½o de la nueva sublista:");
 					dato = lector.next();
 					ILista nuevo = modelo.subLista(Integer.parseInt(dato));
-					view.printMessage("Copia exitosa. \nTamaño de la nueva lista: "+nuevo.size()+"\n---------");
+					view.printMessage("Copia exitosa. \nTamaï¿½o de la nueva lista: "+nuevo.size()+"\n---------");
 					break;
 
 				case 4:
@@ -85,7 +84,7 @@ public class Controller {
 																  "Quick sort"))));
 					int tiempo = modelo.ordenar(Integer.parseInt(dato));
 					view.printMessage("Lista Ordenada!");
-					view.printMessage("Tiempo de ejecución total: " + tiempo+ " milisegundos");
+					view.printMessage("Tiempo de ejecuciï¿½n total: " + tiempo+ " milisegundos");
 					//Faltan los 10 primeros/ultimos videos
 					break;
 
@@ -100,6 +99,6 @@ public class Controller {
 					break;
 			}
 		}
-		
-	}	
+}
+	}
 }
