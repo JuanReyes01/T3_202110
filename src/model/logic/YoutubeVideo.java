@@ -304,5 +304,23 @@ public class YoutubeVideo implements Comparable<YoutubeVideo> {
 		return i-j;
 	}
 	
+	/** Comparación natural de acuerdo a algún atributo con identificación única
+	 * @return valor 0 si this y otro son iguales. Numero negativo si this es menor a otro. 
+	 * Numero positivo this es mayor a otro */
+	public int compareTo1(YoutubeVideo otro)
+	{
+		int x = 0;
+		if(darLikes() == otro.darLikes()){
+			x = 0;
+		}
+		else if(darLikes() < otro.darLikes()){
+			x = -1;
+		}
+		else if(darLikes() > otro.darLikes()){
+			x = 1;
+		}
+		return x;
+	}
+	
 	
 }
