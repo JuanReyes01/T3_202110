@@ -3,10 +3,12 @@ package model.data_structures;
 public class ListaEncadenada<T extends Comparable<T>> implements ILista<T>{
 
 	private NodoLista<T> first;
+	private NodoLista<T> last;
 	private int tamano;
 	
 	public ListaEncadenada() {
 		first = null;
+		last = null;
 		tamano = 0;
 	}
 	
@@ -17,16 +19,20 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T>{
 		}
 		first = nuevo;
 		tamano++;
+		//System.out.println(tamano);
 	}
 
 	public void addLast(T element) {
 		NodoLista<T> nuevo = new NodoLista<T>(element);
-		if(first!=null){
+		if(first!=null&&last==null){
 			lastNode().setNext(nuevo);
 		}
-		else{
+		else if(first==null){
 			first = nuevo;
+		}else{
+		last.setNext(nuevo);
 		}
+		last = nuevo;
 		tamano++;
 	}
 
@@ -137,6 +143,7 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T>{
 	}
 	
 	public void exchange(int pos1, int pos2) {
+		if(pos1==pos2)return;
 		int posReal1 = pos1-1;
 		int posReal2 = pos2-1;
 		NodoLista<T> buscado1 = null;
@@ -189,19 +196,6 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T>{
 	}
 
 	
-	public ListaEncadenada<T> sublista(int numElementos) {
-		ListaEncadenada<T> nueva = new ListaEncadenada<>();
-		if(numElementos==tamano)
-			nueva = this;
-		else{
-			NodoLista<T> actual = first;
-			for(int i=0; i<numElementos; i++){
-				nueva.addLast(actual.getInfo());
-			}
-		}
-		return nueva;
-	}
-	
 	/**
 	 * Crear una sublista de la lista original (this).
 	 * Los elementos se toman en el mismo orden como aparecen en la lista original (this).
@@ -218,9 +212,29 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T>{
 		NodoLista<T> actual = first;
 		for(int i=0; i<numElementos; i++){
 			nueva.addLast(actual.getInfo());
+			actual = actual.getNext();
 		}
 	}
 	return nueva;
 		
+	}
+	
+	/**
+	 * Crea una sublista con los datos ingresados en parametro
+	 * @param i, inicio de la lista
+	 * @param f, final de la lista si la lista es el numero es superior al tamaño de la lista se copia hasta el final de la lista
+	 * @return sublista creada a partir de la seccion indicada
+	 */
+	public ListaEncadenada<T> subList(int i, int f){
+	ListaEncadenada<T> nueva = new ListaEncadenada<>();
+	int posReali = i-1;
+	int posRealf = f-1;
+	NodoLista<T> actual = first;
+	for(int j=0; j<=posRealf&&actual!=null; j++){
+		if(j>=posReali)
+		nueva.addLast(actual.getInfo());
+		actual = actual.getNext();
+	}
+	return nueva;
 	}
 }

@@ -286,19 +286,29 @@ public void changeInfo(int pos, T elem) {
 * original de la lista, se obtiene una copia de la lista original.
 * @return sublista creada con la misma representación de la lista original (this).
 */ 
-public ILista<T> sublista(int numElementos) {
-	ILista<T> copia = (ILista<T>) new ArrayList<T>();
-	if(numElementos == tamanoMax){
+public ArregloDinamico<T> sublista(int numElementos) {
+	ArregloDinamico<T> copia =  new ArregloDinamico<T>();
+	if(numElementos >= tamanoAct){
 		copia = this;
 	}
 	else{
-		for(int i = 0; i < elementos.length; i++)
+		for(int i = 1; i<=numElementos;i++)
 		{
-			T x = (T) firstElement();
+			T x = getElement(i);
 			copia.addLast(x);
 		}
 	}
 	return copia;
+}
+
+
+@Override
+public ArregloDinamico<T> subList(int i, int f) {
+	ArregloDinamico<T> nueva =  new ArregloDinamico<T>();
+	for(int j=i;j<=f;j++){
+		nueva.addLast(getElement(j));
+	}
+	return nueva;
 }
 			
 		}

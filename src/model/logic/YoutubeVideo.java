@@ -1,6 +1,9 @@
 package model.logic;
 
+import java.util.Comparator;
 import java.util.Date;
+
+import model.data_structures.NodoLista;
 
 /**
  * @author Juan Camilo
@@ -296,7 +299,7 @@ public class YoutubeVideo implements Comparable<YoutubeVideo> {
 		//return fechaT.compareTo(o.darFechaT);
 		//Utilizando el compareTo implementado en la clase Date()
 		//Solo que eso se me hace raro (aunque mucho mas efectivo)
-		//otra opción seria utilizar los metodos 
+		//otra opciï¿½n seria utilizar los metodos 
 		// int retorno (fechaT.after(o.getFechaT))?1:-1;
 		//retorno = fechaT.equals(o.getFechaT);
 		int i = fechaT.getDay()+fechaT.getMonth()+fechaT.getYear();
@@ -304,7 +307,7 @@ public class YoutubeVideo implements Comparable<YoutubeVideo> {
 		return i-j;
 	}
 	
-	/** Comparación natural de acuerdo a algún atributo con identificación única
+	/** Comparaciï¿½n natural de acuerdo a algï¿½n atributo con identificaciï¿½n ï¿½nica
 	 * @return valor 0 si this y otro son iguales. Numero negativo si this es menor a otro. 
 	 * Numero positivo this es mayor a otro */
 	public int compareTo1(YoutubeVideo otro)
@@ -322,5 +325,16 @@ public class YoutubeVideo implements Comparable<YoutubeVideo> {
 		return x;
 	}
 	
-	
+	// Comparador alterno de acuerdo al nï¿½mero de likes
+	 public static class ComparadorXLikes implements Comparator<YoutubeVideo> {
+
+	/** Comparador alterno de acuerdo al nï¿½mero de likes
+	* @return valor 0 si video1 y video2 tiene los mismos likes.
+	*valor negativo si video1 tiene menos likes que video2.
+	*valor positivo si video1 tiene mï¿½s likes que video2. 
+	*/
+		 public int compare(YoutubeVideo video1 , YoutubeVideo video2) {
+			 return video1.compareTo1(video2);
+		 }
+	}
 }
