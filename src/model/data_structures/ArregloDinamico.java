@@ -279,6 +279,7 @@ public void changeInfo(int pos, T elem) {
 	elementos[posReal] = elem;
 }
 
+
 /**
 * Crear una sublista de la lista original (this).
 * Los elementos se toman en el mismo orden como aparecen en la lista original (this).
