@@ -43,7 +43,7 @@ public class Controller {
 				case 1:
 					view.printMessage("------- \n=>Ingresa 0 si se quiere utilizar un arreglo dinamico\n=>Ingresa 1 si se quiere utilizar una lista encadenada");
 					dato = lector.next();
-					modelo.inicializarEstrcturas(Integer.parseInt(dato));
+					modelo.inicializarEstructuras(Integer.parseInt(dato));
 					view.printMessage("Se inicialicio una estructa del tipo: "+ (dato.equals("0")?"ArregloDinamico":"ListaEncadenada")+"\n-------");
 					break;
 
@@ -70,10 +70,10 @@ public class Controller {
 				break;
 
 				case 3:
-					view.printMessage("--------- \nDar tamaï¿½o de la nueva sublista:");
+					view.printMessage("--------- \nDar tamaño de la nueva sublista:");
 					dato = lector.next();
 					ILista nuevo = modelo.subLista(Integer.parseInt(dato));
-					view.printMessage("Copia exitosa. \nTamaï¿½o de la nueva lista: "+nuevo.size()+"\n---------");
+					view.printMessage("Copia exitosa. \nTamaño de la nueva lista: "+nuevo.size()+"\n---------");
 					break;
 
 				case 4:
@@ -84,10 +84,10 @@ public class Controller {
 																 (dato.equals("2")?"Shell sort":
 																 (dato.equals("3")?"Merge sort":
 																  "Quick sort"))));
-					int tiempo = modelo.ordenar(Integer.parseInt(dato));
+					long tiempo = modelo.ordenar(Integer.parseInt(dato));
 					view.printMessage("Lista Ordenada!");
-					view.printMessage("Tiempo de ejecuciï¿½n total: " + tiempo+ " milisegundos");
-					//Faltan los 10 primeros/ultimos videos
+					view.printMessage("Tiempo de ejecución total: " + tiempo+ " milisegundos");
+					view.printPrimerosYUltimos(modelo);
 					break;
 
 				case 5: 

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.stream.Collectors;
@@ -20,6 +21,9 @@ import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
 import model.data_structures.ILista;
 import model.data_structures.ListaEncadenada;
+
+
+import model.utils.Ordenamiento;
 
 /**
  * Definicion del modelo del mundo
@@ -35,7 +39,7 @@ public class Modelo {
 	{	
 	}
 	
-	public void inicializarEstrcturas(int tipoLista){
+	public void inicializarEstructuras(int tipoLista){
 		if(tipoLista==0){
 			datos = new ArregloDinamico<YoutubeVideo>();			
 		}
@@ -91,43 +95,35 @@ public class Modelo {
 	public ILista<YoutubeVideo> darArreglo(){
 		return datos;
 	}
-	/**
-	 * Organiza la lista dependiaendo del metodo que llega por parametro.
-	 * @param z  int que representa el metodo para organizar la lista
-	 * @return Un int para ordenar la lista.
-	 */
-	public int organizarLista( int z)
-	{
-		int x = 0;
-		if(z == 4)
-		{
-			x = 4;
-		}
-		if(z == 3)
-		{
-			x = 3;
-		}	
-		if(z == 2)
-		{
-			x = 2;
-		}
-		if(z == 1)
-		{
-			x = 1;
-		}
-		return x;
-	}
 	
-	public int ordenar(int alg){
-		if(alg==1)
-			return 1;
-		if(alg==2)
-			return 2;
-		if(alg==3)
-			return 3;
-		if(alg==4)
-			return 4;
-		return 0;
+	public long ordenar(int alg){
+		long start = 0;
+		long stop = 0;
+		Ordenamiento<YoutubeVideo> o  = new Ordenamiento<YoutubeVideo>();
+		ILista<YoutubeVideo> subListaVideos = datos.sublista(100000);
+		Comparator<YoutubeVideo> comparadorXLikes = new YoutubeVideo.ComparadorXLikes();
+		if(alg==1){
+			start = System.currentTimeMillis();
+			 
+			stop = System.currentTimeMillis();
+		}
+		if(alg==2){
+			start = System.currentTimeMillis();
+			datos = o.ordenarShell(subListaVideos, comparadorXLikes, true);
+			stop = System.currentTimeMillis();
+		}
+		if(alg==3){
+			start = System.currentTimeMillis();
+			datos = o.ordenarMerge(subListaVideos, comparadorXLikes, true);
+			stop = System.currentTimeMillis();
+		}
+		if(alg==4){
+			start = System.currentTimeMillis();
+			datos = o.ordenarQuickSort(subListaVideos, comparadorXLikes, true);
+			stop = System.currentTimeMillis();
+		}
+		
+		return stop-start;
 	}
 	
 	//NOTA
@@ -135,7 +131,7 @@ public class Modelo {
 	//en este se puede cambiar entre ListaEnlazada o ArregloDinamico
 	public String cargarDatos() throws IOException, ParseException{
 		long miliI = System.currentTimeMillis();
-		Reader in = new FileReader("./data/videos-small.csv");
+		Reader in = new FileReader("./data/videos-all.csv");
 		
 		Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);	
 		for (CSVRecord record : records) {
@@ -164,7 +160,7 @@ public class Modelo {
 		    SimpleDateFormat formato2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");		   
 		    Date fechaPu = formato2.parse(fechaP);
 		    YoutubeVideo nuevo = new YoutubeVideo(id, fechaT, titulo, canal, Integer.parseInt(categoria), fechaPu, tags, Integer.parseInt(vistas), Integer.parseInt(likes), Integer.parseInt(dislikes), Integer.parseInt(coment), foto, (nComent.equals("FALSE")?false:true), (rating.equals("FALSE")?false:true), (vidErr.equals("FALSE")?false:true), descripcion, pais);
-		    datos.addLast(nuevo);
+		    agregar(nuevo);
 		    }
 		}
 		long miliF = System.currentTimeMillis();

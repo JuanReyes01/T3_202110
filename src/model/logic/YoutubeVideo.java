@@ -1,6 +1,9 @@
 package model.logic;
 
+import java.util.Comparator;
 import java.util.Date;
+
+import model.data_structures.NodoLista;
 
 /**
  * @author Juan Camilo
@@ -304,5 +307,34 @@ public class YoutubeVideo implements Comparable<YoutubeVideo> {
 		return i-j;
 	}
 	
+	/** Comparación natural de acuerdo a algún atributo con identificación única
+	 * @return valor 0 si this y otro son iguales. Numero negativo si this es menor a otro. 
+	 * Numero positivo this es mayor a otro */
+	public int compareTo1(YoutubeVideo otro)
+	{
+		int x = 0;
+		if(darLikes() == otro.darLikes()){
+			x = 0;
+		}
+		else if(darLikes() < otro.darLikes()){
+			x = -1;
+		}
+		else if(darLikes() > otro.darLikes()){
+			x = 1;
+		}
+		return x;
+	}
 	
+	// Comparador alterno de acuerdo al número de likes
+	 public static class ComparadorXLikes implements Comparator<YoutubeVideo> {
+
+	/** Comparador alterno de acuerdo al número de likes
+	* @return valor 0 si video1 y video2 tiene los mismos likes.
+	*valor negativo si video1 tiene menos likes que video2.
+	*valor positivo si video1 tiene más likes que video2. 
+	*/
+		 public int compare(YoutubeVideo video1 , YoutubeVideo video2) {
+			 return video1.compareTo1(video2);
+		 }
+	}
 }

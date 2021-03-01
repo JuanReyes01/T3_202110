@@ -9,7 +9,6 @@ public class View
 	     */
 	    public View()
 	    {
-	    	
 	    }
 	    
 		public void printMenu()
@@ -36,5 +35,16 @@ public class View
 			a+="]";
 			System.out.println(a);
 			// TODO implementar
+		}
+		
+		public void printPrimerosYUltimos(Modelo modelo)
+		{
+			for(int i=1; i<=10; i++){
+				System.out.println(modelo.darArreglo().getElement(i).darTitulo()+": "+modelo.darArreglo().getElement(i).darLikes());
+			}
+			System.out.println("===================================================================================");
+			for(int i=modelo.darTamano();i>=(modelo.darTamano()-10);i--){
+				System.out.println(modelo.darArreglo().getElement(i).darTitulo()+": "+modelo.darArreglo().getElement(i).darLikes());
+			}
 		}
 }

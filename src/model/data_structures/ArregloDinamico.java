@@ -300,5 +300,15 @@ public ILista<T> sublista(int numElementos) {
 	}
 	return copia;
 }
+
+
+@Override
+public ILista<T> subList(int i, int f) {
+	ILista<T> nueva = (ILista<T>) new ArrayList<T>();
+	for(int j=i;j<f;j++){
+		nueva.addLast(getElement(j));
+	}
+	return nueva;
+}
 			
 		}

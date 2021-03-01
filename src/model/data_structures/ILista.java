@@ -25,4 +25,5 @@ public interface ILista <T extends Comparable<T>>{
 	* @return sublista creada con la misma representación de la lista original (this).
 	*/
 	ILista<T> sublista(int numElementos);
+	ILista<T> subList(int i, int f);
 }
