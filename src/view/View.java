@@ -4,6 +4,7 @@ import model.logic.Modelo;
 
 public class View 
 {
+	
 	    /**
 	     * Metodo constructor
 	     */
@@ -39,12 +40,16 @@ public class View
 		
 		public void printPrimerosYUltimos(Modelo modelo)
 		{
+			System.out.println("===================================================================================");
+			System.out.println("Primeros 10 elementos:");
 			for(int i=1; i<=10; i++){
 				System.out.println(modelo.darArreglo().getElement(i).darTitulo()+": "+modelo.darArreglo().getElement(i).darLikes());
 			}
 			System.out.println("===================================================================================");
+			System.out.println("Ultimos 10 elementos:");
 			for(int i=modelo.darTamano();i>=(modelo.darTamano()-10);i--){
 				System.out.println(modelo.darArreglo().getElement(i).darTitulo()+": "+modelo.darArreglo().getElement(i).darLikes());
 			}
+			System.out.println("===================================================================================");
 		}
 }
