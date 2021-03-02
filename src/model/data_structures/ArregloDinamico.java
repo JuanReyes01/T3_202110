@@ -132,7 +132,7 @@ public void addFirst(T element) {
         {
          	 elementos[i] = copia[i];
         } 
-	    System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
+	    //System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
    }	
    elementos[0] = element;
    int j = 1;
@@ -155,7 +155,7 @@ public void addLast(T element) {
         {
          	 elementos[i] = copia[i];
         } 
-	    System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
+	   // System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
    }	
    elementos[tamanoAct] = element;
    tamanoAct++;
@@ -173,7 +173,7 @@ public void insertElement(T element, int pos) {
         {
          	 elementos[i] = copia[i];
         } 
-	    System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
+	    //System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
     }
 	tamanoAct++;
 	T[] nuevo = (T[]) new Comparable[tamanoAct];

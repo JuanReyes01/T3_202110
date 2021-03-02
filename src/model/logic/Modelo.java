@@ -100,7 +100,7 @@ public class Modelo {
 		long start = 0;
 		long stop = 0;
 		Ordenamiento<YoutubeVideo> o  = new Ordenamiento<YoutubeVideo>();
-		ILista<YoutubeVideo> subListaVideos = datos.sublista(1000);
+		ILista<YoutubeVideo> subListaVideos = datos.sublista(512000);
 		Comparator<YoutubeVideo> comparadorXLikes = new YoutubeVideo.ComparadorXLikes();
 		if(alg==1){
 			start = System.currentTimeMillis();
@@ -131,7 +131,7 @@ public class Modelo {
 	//en este se puede cambiar entre ListaEnlazada o ArregloDinamico
 	public String cargarDatos() throws IOException, ParseException{
 		long miliI = System.currentTimeMillis();
-		Reader in = new FileReader("./data/videos-small.csv");
+		Reader in = new FileReader("./data/videos-all.csv");
 		
 		Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);	
 		for (CSVRecord record : records) {
